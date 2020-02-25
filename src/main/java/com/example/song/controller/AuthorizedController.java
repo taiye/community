@@ -31,7 +31,6 @@ public class AuthorizedController {//Authorize是github的一个接口用来拿a
     @GetMapping("/callback")
     public String callback(@RequestParam(name="code") String code,
                            @RequestParam(name="state") String state,
-                           HttpServletRequest httpServletRequest,
                            HttpServletResponse httpServletResponse
                            ){
         AccessTokenDto accessTokenDto = new AccessTokenDto();
@@ -51,6 +50,7 @@ public class AuthorizedController {//Authorize是github的一个接口用来拿a
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
+            user.setAvatarUrl(githubUser.getAvatarUrl());
             userMapper.insert(user);
             httpServletResponse.addCookie(new Cookie("token",token));
             return "redirect:/";

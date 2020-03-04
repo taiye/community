@@ -1,7 +1,7 @@
 package com.example.song.controller;
 
-import com.example.song.dataTransferO.AccessTokenDto;
-import com.example.song.dataTransferO.GithubUser;
+import com.example.song.DTO.AccessTokenDto;
+import com.example.song.DTO.GithubUser;
 import com.example.song.mapper.UserMapper;
 import com.example.song.model.User;
 import com.example.song.provider.GithubProvider;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 

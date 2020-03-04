@@ -1,8 +1,8 @@
 package com.example.song.provider;
 
 import com.alibaba.fastjson.JSON;
-import com.example.song.dataTransferO.AccessTokenDto;
-import com.example.song.dataTransferO.GithubUser;
+import com.example.song.DTO.AccessTokenDto;
+import com.example.song.DTO.GithubUser;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.example.song.dataTransferO;
+package com.example.song.DTO;
 
 import lombok.Data;
 

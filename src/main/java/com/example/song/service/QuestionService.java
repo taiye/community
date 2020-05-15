@@ -40,4 +40,24 @@ public class QuestionService {
         paginationDTO.setQuestionDTOS(questionDTOS);
         return paginationDTO;
     }
+    public PaginationDTO list(Integer userId,Integer pageNum,Integer pageSize){
+        Integer totalCount = questionMapper.countByUserId(userId);//查询总记录数
+        Integer totalPage = (totalCount % pageSize == 0) ? (totalCount / pageSize) : (totalCount / pageSize + 1); //计算总页数
+        pageNum = (pageNum > 0) ? pageNum : 1; //合理化页码数，小于1的设置为1
+        pageNum = (pageNum <= totalPage) ? pageNum : totalPage;//合理化页码数，大于总页数的设置为最后一页
+        PaginationDTO paginationDTO = new PaginationDTO();
+        paginationDTO.setPagination(totalPage, pageNum);
+        Integer offset = pageSize * (pageNum - 1);//计算偏移值
+        List<Question> questions = questionMapper.listByUserId(userId,offset, pageSize);
+        List<QuestionDTO> questionDTOS = new ArrayList<>();
+        for (Question question : questions) {
+            User user = userMapper.findByID(question.getCreator());
+            QuestionDTO questionDTO = new QuestionDTO();
+            BeanUtils.copyProperties(question, questionDTO);//快速将前面对象的属性赋值到后面对象，按属性名对应
+            questionDTO.setUser(user);//开启mybatis驼峰映射，不然mybatis无法将user.countView与count_view对应
+            questionDTOS.add(questionDTO);
+        }
+        paginationDTO.setQuestionDTOS(questionDTOS);
+        return paginationDTO;
+    }
 }
